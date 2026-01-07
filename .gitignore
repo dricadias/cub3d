@@ -1,0 +1,9 @@
+# ignore .vscode folder
+.vscode/
+
+# ignore mlx folder
+mlx/
+
+# ignore *.o | *.a
+*.o
+*.a
