@@ -1,5 +1,5 @@
-#ifndef CUB3D
-# define CUB3D
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
@@ -10,21 +10,31 @@
 # include <errno.h>
 # include <fcntl.h>
 
-typedef struct s_pos
+typedef struct s_player
 {
-	double	x;
-	double	y;
-}	t_pos;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x; // fov
+	double	plane_y;
+}	t_player;
 
 typedef struct	s_map
 {
-	int		width;
-	int		height;
-	char	**flood;
-	char	**matrix;
-	t_pos	player_pos;
+	int			width;
+	int			height;
+	char		**flood;
+	char		**matrix;
+	t_player	player_data;
 }	t_map;
 
-
+/* typedef struct	s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_map	*map;
+}	t_game;
+ */
 
 #endif

@@ -7,7 +7,7 @@ MLX_FLAGS = -lm -lmlx -lXext -lX11
 LIBFTDIR = libft
 RM = rm -rf
 
-SRCS = 
+SRCS = srcs/teste.c
 OBJS = $(SRCS:.c=.o)
 
 INCLUDE = -L ./libft -L mlx
