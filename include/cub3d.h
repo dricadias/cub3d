@@ -16,6 +16,12 @@ typedef struct s_pos
 	double	y;
 }	t_pos;
 
+" i feel like this should exist, dont now yet how to defin
+typedef struct dir_vector
+{
+	its t_pos +('+' ou '-')
+}  ;
+  "
 typedef struct	s_map
 {
 	int		width;
@@ -26,5 +32,12 @@ typedef struct	s_map
 }	t_map;
 
 
+"typedef struct player
+{
+	t_pos *init_pos; 
+	dir_vector *looking
+	#camera width definitions... raycasting FOV (vai ser sempre o mesmo, podemos usar rato aumentar/diminuir (isto é capaz de ser uma pain in the ass por causa de minilibx rendering images))
+
+}"
 
 #endif
