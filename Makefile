@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/22 19:16:25 by adias-do          #+#    #+#              #
+#    Updated: 2026/01/22 19:16:28 by adias-do         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 
 CC = cc
@@ -8,7 +20,8 @@ LIBFTDIR = libft
 RM = rm -rf
 
 SRCS = srcs/main.c \
-	srcs/init_structs.c
+	srcs/init_structs.c \
+	srcs/draw.c
 OBJS = $(SRCS:.c=.o)
 
 INCLUDE = -L ./libft -L mlx

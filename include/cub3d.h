@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:02:48 by adias-do          #+#    #+#             */
-/*   Updated: 2026/01/11 18:28:18 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:49:24 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <fcntl.h>
 
 # define TILE 32
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 
 typedef struct s_player
 {
@@ -53,8 +55,26 @@ typedef struct	s_game
 	t_map	*map;
 }	t_game;
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
-t_game	*init_game(void);
+
+// init structs
+t_map		*init_map(void);
+t_game		*init_game(void);
+t_player	init_player(void);
+
+// draw functions
+void	pixel_put(t_data *data, int x, int y, int color);
+void	draw_tile(t_data *img, int tile_x, int tile_y, int color);
+void	draw_map2d(t_map *map, t_data *img);
+void	draw_player(t_player *player, t_data *img);
 
 
 #endif
