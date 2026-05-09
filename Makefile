@@ -6,7 +6,7 @@
 #    By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 19:16:25 by adias-do          #+#    #+#              #
-#    Updated: 2026/01/22 19:16:28 by adias-do         ###   ########.fr        #
+#    Updated: 2026/05/09 13:09:44 by adias-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,19 @@ LIBFTDIR = libft
 RM = rm -rf
 
 SRCS = srcs/main.c \
-	srcs/init_structs.c \
-	srcs/draw.c
+	srcs/draw.c \
+	srcs/free.c \
+	srcs/movements.c \
+	srcs/raycast.c \
+	srcs/textures.c \
+	srcs/gnl.c \
+	srcs/extract_map.c \
+	srcs/validate_map.c \
+	srcs/init_player.c \
+	srcs/cleanup.c \
+	srcs/config.c \
+	srcs/read_file.c
+
 OBJS = $(SRCS:.c=.o)
 
 INCLUDE = -L ./libft -L mlx

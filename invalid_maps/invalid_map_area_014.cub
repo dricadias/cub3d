@@ -1,0 +1,12 @@
+R 1080 720
+NO ./textures/north.xpm
+SO ./textures/south.xpm
+EA ./textures/east.xpm
+WE ./textures/west.xpm
+ 
+C 255,200,160
+F 122,122,122
+
+111
+121
+111
