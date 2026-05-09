@@ -29,6 +29,13 @@ int	check_leaks(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
+			if (map->matrix[y][x] != '0'
+				&& !is_player(map->matrix[y][x]) && map->matrix[y][x] != '1' 
+				&& map->matrix[y][x] != ' ' )
+			{
+				printf("Error\nInvalid char in map ");
+				return (0);
+			}
 			if (map->matrix[y][x] == '0'
 				|| is_player(map->matrix[y][x]))
 			{

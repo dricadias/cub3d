@@ -63,6 +63,11 @@ char	**read_file(char *filename)
 	if (!filename || !*filename)
 		return (printf("Error\nNo filename provided\n"), NULL);
 	*/
+	if (ft_strncmp(&filename[ft_strlen(filename) -4], ".cub", 4))
+	{
+		printf("Error\nFilename extension most be .cub");
+		return (NULL);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error\nCannot open file: %s\n", strerror(errno)), NULL);

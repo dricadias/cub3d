@@ -35,7 +35,7 @@ static int	parse_color(char *line)
 	}
 	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 	{
-		printf("Error\nInvalid color format: expected R,G,B (3 values)\n");
+		//printf("Error\nInvalid color format: expected R,G,B (3 values)\n");
 		free_split(rgb);
 		return (-1);
 	}
@@ -45,7 +45,7 @@ static int	parse_color(char *line)
 	free_split(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		printf("Error\nRGB values must be between 0 and 255\n");
+		//printf("Error\nRGB values must be between 0 and 255\n");
 		return (-1);
 	}
 	result = create_rgb(r, g, b);
