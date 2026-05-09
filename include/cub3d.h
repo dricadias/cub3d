@@ -33,17 +33,13 @@ typedef struct s_pos
 	double	y;
 }	t_pos;
 
-typedef struct s_player
+" i feel like this should exist, dont now yet how to defin
+typedef struct dir_vector
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-}	t_player;
-
-typedef struct s_map
+	its t_pos +('+' ou '-')
+}  ;
+  "
+typedef struct	s_map
 {
 	int		width;
 	int		height;
@@ -157,11 +153,12 @@ int			calc_tex_x(t_game *game, t_ray *ray, t_texture *current_tex);
 
 void		cast_ray(t_player *player, t_map *map, t_ray *ray, int x);
 
-int			key_press(int keysym, t_game *game);
-void		move_player(t_game *game, double move_dir);
-void		rotate_player(t_game *game, double rot_dir);
-void		strafe_player(t_game *game, double strafe_dir);
-int			close_window(t_game *game);
-void		free_matrix(char **matrix);
+"typedef struct player
+{
+	t_pos *init_pos; 
+	dir_vector *looking
+	#camera width definitions... raycasting FOV (vai ser sempre o mesmo, podemos usar rato aumentar/diminuir (isto é capaz de ser uma pain in the ass por causa de minilibx rendering images))
+
+}"
 
 #endif

@@ -1,133 +1,55 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/22 14:09:25 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/09 14:20:53 by adias-do         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3d.h"
-
-void	free_file(char **file)
-{
-	int	i;
-
-	if (!file)
-		return ;
-	i = 0;
-	while (file[i])
-	{
-		free(file[i]);
-		i++;
-	}
-	free(file);
-}
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-void	init_game(t_game *game)
-{
-	if (!game)
-		return ;
-	game->mlx = NULL;
-	game->win = NULL;
-	game->img.img = NULL;
-	game->img.addr = NULL;
-	game->map.matrix = NULL;
-	game->map.no_path = NULL;
-	game->map.so_path = NULL;
-	game->map.we_path = NULL;
-	game->map.ea_path = NULL;
-	game->north.img = NULL;
-	game->south.img = NULL;
-	game->east.img = NULL;
-	game->west.img = NULL;
-}
-
-int	render(t_game *game)
-{
-	t_ray	ray;
-	int		x;
-
-	x = 0;
-	while (x < WIN_WIDTH)
-	{
-		cast_ray(&game->player, &game->map, &ray, x); 
-		draw_column(game, &ray, x);
-		x++;
-	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	return (0);
-}
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
-	t_game	game = {0};
-	char	**file;
-	int		start;
-
-	if (argc != 2)
-		return (printf("Error\nUsage: ./cub3D map.cub\n"), 1);
-	file = read_file(argv[1]);
-	if (!file)
-		return (1);
-	parse_config(&game.map, file);
-	if (!valid_config(&game.map))
-		return (cleanup_game(&game, file, 1), 1);
-	start = map_index(file);
-	if (start == -1)
-	{
-		printf("Error\nMap not found in file\n");
-		return (cleanup_game(&game, file, 1), 1);
-	}
-	built_map(&game, file, start);
-	if (!game.map.matrix)
-	{
-		printf("Error\nFailed to build map\n");
-		return (cleanup_game(&game, file, 1), 1);
-	}
-	if (!validate_map(&game.map))
-		return (cleanup_game(&game, file, 1), 1);
-	init_player(&game);
-	printf("Map is valid!\n");
-	game.mlx = mlx_init(); 
-	if (!game.mlx)
-		return (printf("Error\nFailed to initialize MLX\n"), cleanup_game(&game, file, 1), 1);
-	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
-	if (!game.win)
-		return (printf("Error\nFailed to create window\n"), cleanup_game(&game, file, 1), 1);
-	game.img.img = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!game.img.img)
-		return (cleanup_game(&game, file, 1), 1);
-	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel,
-			&game.img.line_length, &game.img.endian);
-	load_texture(game.mlx, &game.north, game.map.no_path);
-	load_texture(game.mlx, &game.south, game.map.so_path);
-	load_texture(game.mlx, &game.east, game.map.we_path);
-	load_texture(game.mlx, &game.west, game.map.ea_path);
-	if (!game.north.img || !game.south.img || !game.east.img || !game.west.img)
-		return (cleanup_game(&game, file, 1), 1);
-	render(&game);
-	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
-	mlx_hook(game.win, 17, 0, close_window, &game);
-	mlx_loop(game.mlx);
-	cleanup_game(&game, file, 1);
+	"check number of args? nao por causa do tamanho do mapa"
+    'obrigar esta ordem 4 textures+ floor + ceiling + map'
 	return (0);
+}
+
+" TO DO: estava a pensar que se pode gerar uma file temporaria (existe enquanto o programa corre com o mapa)
+char *map_hadling(char **map_file)
+{
+    char *type;
+    -> how to normalize various lengths of walls?
+        * Flood fill OR Edge scanning (which its more efficient) 
+        -> check all 1 on edges 
+    return type # if empty no error 
+}
+"
+void error_message(char *type)
+{
+    "!! como lidar com os frees so abrir files depois de verificar TUDO
+    mais facil do que um clean_up backtracking, right... ?"
+    "SE HOUVER TEMPO to do: organizar types codes numa lista/ tabela..."
+    
+    printf("Error\n");
+    'then if code associated print'
+    if  (strncmp(type, "MI", 3))
+        printf("missing identifier: have to be the following 4: NO; SO; WE; EA\n")
+    else if(strncmp(type, "WI", 3))
+        printf("wrong identifier: must be NO; SO; WE ou EA (one each, no repetions)\n");
+    else if (strncmp(type, DU, 3))
+        printf("duplicated identifier\n"); 'TO DO specify duplicated'
+    else if (strncmp(type, TF, 3))
+        printf(" texture file doesnt exist\n"); 'TO DO specifie which one...'
+    'os dois proximos vai ter de se abrir as files....'
+    else if (strncmp(type, FW, 3))
+        printf("invalid RGB values for the floor: number ∈ [0, 255]; format (eg: F 220,100,0)\n ");
+    else if (strncmp (type, CW, 3))
+        printf ("invalid RGB values for the ceiling: number ∈ [0, 255]; format (eg: C 255,255,255)\n ");
+    else if (strncmp(type, IF, 3))
+        printf("most have one floor and one ceiling file, (really one for each)\n")
+    'missed something...?'
+    else if (strncmp(type, MW, 3))'ter uma subfuncao para  tratar de char *type aqui: NECESSARIO LER A FILE, se der error aqui tem de fechar!!!'       
+    {
+        printf("map walls: must be enclosed by walls (1)\n");
+        printf("example:\n1111111\n1000001\n10N0001\n");
+    }
+    else if (strncmp(type, MP, 3))
+        printf("missing player: represent one (and one only) by:N, S, E or  W \n");
+    printf("if your message error doesnt seems right, confirm that you inputed the arguments in the order:\n");
+    pritnf("XX ./path_to_the_XX_texture\nXX ./path_to_the_XX_texture\n");
+    printf("XX ./path_to_the_XX_texture\nXX ./path_to_the_XX_texture\nFloor\nCeiling\nMAP\n");
 }
