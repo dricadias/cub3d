@@ -1,5 +1,5 @@
-R 100 720
-WE ./textures/west.xpm
+ 100 720
+WE ./textures/aa.xpm
 SO ./textures/south.xpm
 EA ./textures/east.xpm
 NO ./textures/north.xpm

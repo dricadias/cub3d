@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 W ./textures/greystone.xpm
 SO ./textures/south.xpm
 EA ./textures/east.xpm

@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 WE ./wolf
 tex/greystone.xpm
 SO ./textures/south.xpm

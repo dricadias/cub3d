@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 NO ./woolftex/greystone.xpm
 SO ./textures/south.xpm
 EA ./textures/east.xpm

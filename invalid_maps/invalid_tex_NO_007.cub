@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 NO ./textures/north.xpmxpm
 SO ./textures/south.xpm
 EA ./textures/east.xpm

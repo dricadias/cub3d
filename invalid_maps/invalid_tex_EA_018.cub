@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 EA ./textures/greystonepng
 NO ./textures/redbrick.xpm
 SO ./textures/east.xpm

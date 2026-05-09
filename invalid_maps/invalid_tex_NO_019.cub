@@ -1,4 +1,4 @@
-R 100 720
+ 100 720
 N ./textures/greystone.xpm
 NO ./textures/north.xpm
 SO ./textures/south.xpm
