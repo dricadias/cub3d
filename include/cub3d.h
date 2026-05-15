@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:02:48 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/09 12:55:50 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:35:04 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_game
 	t_texture	west;
 }	t_game;
 
-
 // =========================================================
 // PARSER E VALIDAÇÃO
 // =========================================================
@@ -138,7 +137,6 @@ void		init_game(t_game *game);
 void		free_resources(t_game *game);
 void		free_matrix(char **matrix);
 void		cleanup_game(t_game *game, char **file, int free_file_flag);
-
 
 // =========================================================
 // RAYCASTING E RENDERIZAÇÃO

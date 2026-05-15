@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 03:43:33 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/09 14:22:24 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:28:09 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	calc_step(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x)
+			* ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -51,7 +52,8 @@ static void	calc_step(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y)
+			* ray->delta_dist_y;
 	}
 }
 
@@ -72,7 +74,8 @@ static void	perform_dda(t_map *map, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0 || ray->map_x >= map->width || ray->map_y >= map->height)
+		if (ray->map_x < 0 || ray->map_y < 0 || ray->map_x >= map->width
+			|| ray->map_y >= map->height)
 			ray->hit = 1;
 		else if (map->matrix[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;

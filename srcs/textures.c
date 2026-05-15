@@ -6,57 +6,11 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 03:43:56 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/09 14:22:47 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:33:55 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	load_texture(void *mlx, t_texture *tex, char *path)
-{
-	if (!mlx || !tex || !path)
-	{
-		printf("Error\nInvalid parameters for texture loading\n");
-		exit(1);
-	}
-	if (!*path)
-	{
-		printf("Error\nEmpty texture path\n");
-		exit(1);
-	}
-	tex->img = mlx_xpm_file_to_image(mlx, path,
-			&tex->width, &tex->height);
-	if (!tex->img)
-	{
-		printf("Error\nTexture load: %s (file not found or inv. format)\n", path);
-		exit(1);
-	}
-	if (tex->width <= 0 || tex->height <= 0)
-	{
-		printf("Error\nTexture has invalid dimensions: %s (w=%d, h=%d)\n",
-			path, tex->width, tex->height);
-		mlx_destroy_image(mlx, tex->img);
-		tex->img = NULL;
-		exit(1);
-	}
-	tex->addr = mlx_get_data_addr(tex->img,
-			&tex->bpp, &tex->line_len, &tex->endian);
-	if (!tex->addr)
-	{
-		printf("Error\nFailed to get texture data address: %s\n", path);
-		mlx_destroy_image(mlx, tex->img);
-		tex->img = NULL;
-		exit(1);
-	}
-	if (tex->bpp <= 0 || tex->line_len <= 0)
-	{
-		printf("Error\nTexture has invalid data format: %s\n", path);
-		mlx_destroy_image(mlx, tex->img);
-		tex->img = NULL;
-		tex->addr = NULL;
-		exit(1);
-	}
-}
 
 t_texture	*get_wall_texture(t_game *game, t_ray *ray)
 {

@@ -6,7 +6,7 @@
 #    By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 19:16:25 by adias-do          #+#    #+#              #
-#    Updated: 2026/05/09 13:09:44 by adias-do         ###   ########.fr        #
+#    Updated: 2026/05/15 15:33:22 by adias-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = srcs/main.c \
 	srcs/movements.c \
 	srcs/raycast.c \
 	srcs/textures.c \
+	srcs/textures2.c \
 	srcs/gnl.c \
 	srcs/extract_map.c \
 	srcs/validate_map.c \
