@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:02:48 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/15 15:35:04 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:46:51 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void		cleanup_game(t_game *game, char **file, int free_file_flag);
 // RAYCASTING E RENDERIZAÇÃO
 // =========================================================
 void		load_texture(void *mlx, t_texture *tex, char *path);
-void		free_texture(void *mlx, t_texture *tex);
+void		free_file(char **file);
 
 int			render(t_game *game);
 void		pixel_put(t_img *data, int x, int y, int color);

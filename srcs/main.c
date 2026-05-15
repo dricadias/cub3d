@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:09:25 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/15 01:38:12 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:44:44 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parse_and_build(&game, file))
 		return (cleanup_game(&game, file, 1), 1);
+	free_file(file);
+	file = NULL;
+	gnl_cleanup();
 	if (!setup_graphics(&game))
 		return (cleanup_game(&game, file, 1), 1);
 	render(&game);

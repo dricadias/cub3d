@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 03:42:08 by adias-do          #+#    #+#             */
-/*   Updated: 2026/05/09 13:39:51 by adias-do         ###   ########.fr       */
+/*   Updated: 2026/05/15 15:46:12 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,21 @@ static void	free_graphics(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+}
+
+void	free_file(char **file)
+{
+	int	i;
+
+	if (!file)
+		return ;
+	i = 0;
+	while (file[i])
+	{
+		free(file[i]);
+		i++;
+	}
+	free(file);
 }
 
 int	close_window(t_game *game)
