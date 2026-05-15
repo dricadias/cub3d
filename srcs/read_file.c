@@ -6,7 +6,7 @@
 /*   By: anferrei <anferrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 13:57:54 by anferrei          #+#    #+#             */
-/*   Updated: 2026/04/09 13:57:54 by anferrei         ###   ########.fr       */
+/*   Updated: 2026/05/15 01:45:00 by anferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ static char	**add_line(char **arr, char *line, int count)
 
 	new = malloc(sizeof(char *) * (count + 2));
 	if (!new)
-	{
-		printf("Error\nMemory allocation failed for file array\n");
-		return (NULL);
-	}
+		return (printf("Error\nMalloc failed for file array\n"), NULL);
 	i = 0;
 	while (i < count)
 	{
@@ -59,49 +56,41 @@ char	**read_file(char *filename)
 	char	**file;
 	int		count;
 
-	/* nunca entra aqui ja viu argc
-	if (!filename || !*filename)
-		return (printf("Error\nNo filename provided\n"), NULL);
-	*/
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (printf("Error\nCannot open file: %s\n", strerror(errno)), NULL);
+		return (printf("Error\nOpen failed: %s\n", strerror(errno)), NULL);
 	file = NULL;
 	count = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		trim_newline(line);
-		file = add_line(file, line, count);
+		file = add_line(file, line, count++);
 		if (!file)
-		{
-			free(line);
-			close(fd);
-			return (NULL);
-		}
-		count++;
+			return (free(line), close(fd), NULL);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!file) //funciona!
-		return (printf("Error\nEmpty file or reading error\n"), NULL);
+	if (!file)
+		return (printf("Error\nEmpty file\n"), NULL);
 	return (file);
 }
 
-//esta aqui mas é validation!!!!!!!111
+static int	is_config_line(char *line)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0
+		|| ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+		return (1);
+	return (0);
+}
+
 int	is_map(char *line)
 {
 	int	i;
 	int	has_map_char;
 
-	if (!line || !*line)
-		return (0);
-	if (ft_strncmp(line, "NO ", 3) == 0
-		|| ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0
-		|| ft_strncmp(line, "EA ", 3) == 0
-		|| ft_strncmp(line, "F ", 2) == 0
-		|| ft_strncmp(line, "C ", 2) == 0)
+	if (!line || !*line || is_config_line(line))
 		return (0);
 	i = 0;
 	has_map_char = 0;
@@ -114,20 +103,4 @@ int	is_map(char *line)
 		i++;
 	}
 	return (has_map_char);
-}
-
-int	map_index(char **file)
-{
-	int	i;
-
-	if (!file)
-		return (-1);
-	i = 0;
-	while (file[i])
-	{
-		if (is_map(file[i]))
-			return (i);
-		i++;
-	}
-	return (-1);
 }

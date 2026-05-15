@@ -28,7 +28,7 @@ void	load_texture(void *mlx, t_texture *tex, char *path)
 			&tex->width, &tex->height);
 	if (!tex->img)
 	{
-		printf("Error\nTexture load: %s (file not found or invalid format)\n", path);
+		printf("Error\nTexture load: %s (file not found or inv. format)\n", path);
 		exit(1);
 	}
 	if (tex->width <= 0 || tex->height <= 0)
@@ -97,11 +97,9 @@ int	calc_tex_x(t_game *game, t_ray *ray, t_texture *current_tex)
 		wall_x = game->player.pos_x + ray->perp_wall_dist * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * (double)current_tex->width);
-	
 	if (ray->side == 0 && ray->ray_dir_x < 0)
 		tex_x = current_tex->width - tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y > 0)
 		tex_x = current_tex->width - tex_x - 1;
-		
 	return (tex_x);
 }

@@ -29,9 +29,11 @@ SRCS = srcs/main.c \
 	srcs/extract_map.c \
 	srcs/validate_map.c \
 	srcs/init_player.c \
-	srcs/cleanup.c \
+	srcs/init_cleanup.c \
 	srcs/config.c \
-	srcs/read_file.c
+	srcs/config_utils.c \
+	srcs/read_file.c \
+	srcs/render.c 
 
 OBJS = $(SRCS:.c=.o)
 
