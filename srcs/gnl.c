@@ -9,15 +9,13 @@
 /*   Updated: 2026/04/09 13:55:04 by anferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../include/cub3d.h"
 
-static char	*g_stored = NULL; //dont know if i can have this based on 42 rules (norminette)
-
-static char	*ft_free(char *ptr)
+static char	*ft_free(char **ptr)
 {
-	if (ptr)
-		free(ptr);
+	if (*ptr)
+		free(*ptr);
+	*ptr = NULL;
 	return (NULL);
 }
 
@@ -31,10 +29,7 @@ static char	*read_and_save(int fd, char *stored, char *buffer)
 	{
 		byt_read = read(fd, buffer, BUFFER_SIZE);
 		if (byt_read == -1)
-		{
-			printf("Error\nRead error: %s\n", strerror(errno));
-			return (ft_free(stored));
-		}
+			return (ft_free(&stored));
 		if (byt_read == 0)
 			break ;
 		buffer[byt_read] = '\0';
@@ -44,66 +39,55 @@ static char	*read_and_save(int fd, char *stored, char *buffer)
 			return (NULL);
 		temp = stored;
 		stored = ft_strjoin(temp, buffer);
-		ft_free(temp);
+		free(temp);
 		if (!stored)
 			return (NULL);
 	}
 	return (stored);
 }
 
-static char	*extract_line(char *stored)
+static char	*extract_line(char **stored_ptr)
 {
-	char	*updated;
+	char	*line;
+	char	*tmp;
 	int		i;
 
 	i = 0;
-	if (!stored || !*stored)
+	if (!*stored_ptr || !**stored_ptr)
 		return (NULL);
-	while (stored[i] && stored[i] != '\n')
+	while ((*stored_ptr)[i] && (*stored_ptr)[i] != '\n')
 		i++;
-	if (stored[i] == '\n')
+	if ((*stored_ptr)[i] == '\n')
 		i++;
-	updated = ft_substr(stored, i, ft_strlen(stored) - i);
-	if (updated && *updated == '\0')
-		updated = ft_free(updated);
-	stored[i] = '\0';
-	return (updated);
+	line = ft_substr(*stored_ptr, 0, i);
+	tmp = ft_substr(*stored_ptr, i, ft_strlen(*stored_ptr) - i);
+	free(*stored_ptr);
+	*stored_ptr = tmp;
+	if (*stored_ptr && **stored_ptr == '\0')
+		ft_free(stored_ptr);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
+	static char	*stored;
 	char		*line;
 	char		*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
-	{
-		printf("Error\nBuffer allocation failed in GNL\n");
 		return (NULL);
-	}
-
-	line = read_and_save(fd, g_stored, buffer);
+	stored = read_and_save(fd, stored, buffer);
 	free(buffer);
-
-	if (!line)
-	{
-		g_stored = NULL;
+	if (!stored)
 		return (NULL);
-	}
-
-	g_stored = extract_line(line);
+	line = extract_line(&stored);
 	return (line);
 }
 
-// ✅ NEW: Cleanup function for GNL
 void	gnl_cleanup(void)
 {
-	if (g_stored)
-	{
-		free(g_stored);
-		g_stored = NULL;
-	}
+	get_next_line(-1);
 }

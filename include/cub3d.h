@@ -118,7 +118,7 @@ void		gnl_cleanup(void);
 
 void		parse_config(t_map *map, char **file);
 int			valid_config(t_map *map);
-
+int			handle_identifier(t_map *map, char *line);
 int			is_map(char *line);
 int			map_index(char **file);
 void		built_map(t_game *game, char **file, int start);
@@ -135,11 +135,11 @@ int			check_leaks(t_map *map);
 void		init_player(t_game *game);
 void		init_game(t_game *game);
 
-void		free_file(char **file);
+void		free_matrix(char **file);
 void		free_map(t_map *map);
 void		free_split(char **arr);
 void		free_config(t_map *map);
-void		cleanup_game(t_game *game, char **file, int free_file_flag);
+void		cleanup_game(t_game *game, char **file, int free_matrix_flag);
 
 
 // =========================================================

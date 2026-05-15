@@ -31,7 +31,9 @@ SRCS = srcs/main.c \
 	srcs/init_player.c \
 	srcs/cleanup.c \
 	srcs/config.c \
-	srcs/read_file.c
+	srcs/read_file.c \
+	srcs/config_utils.c \
+	srcs/render.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -12,6 +12,21 @@
 
 #include "../include/cub3d.h"
 
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	if (!matrix)
+		return ;
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+
 void	free_map(t_map *map)
 {
 	int	i;
@@ -68,7 +83,7 @@ void	free_texture(void *mlx, t_texture *tex)
 	}
 }
 
-void	cleanup_game(t_game *game, char **file, int free_file_flag)
+void	cleanup_game(t_game *game, char **file, int free_matrix_flag)
 {
 	if (!game)
 		return ;
@@ -91,7 +106,6 @@ void	cleanup_game(t_game *game, char **file, int free_file_flag)
 	}
 	free_config(&game->map);
 	free_map(&game->map);
-	if (free_file_flag && file)
-		free_file(file);
-	
+	if (free_matrix_flag && file)
+		free_matrix(file);
 }
